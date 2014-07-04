@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Univapps</id>
+    <version>1.0.0</version>
+    <authors>Vapps</authors>
+    <owners>Vapps</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>PCL toolkit for Universal App</description>
+    <releaseNotes>Add RegisterBackgroundTask function</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+  </metadata>
+</package>

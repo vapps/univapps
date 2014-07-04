@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Windows.ApplicationModel.Background;
 
-namespace Vapps
+namespace Univapps
 {
     public sealed class Helper
     {

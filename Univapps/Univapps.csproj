@@ -5,11 +5,11 @@
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F06F03BC-BD73-4DAF-94B8-1B40957F1F61}</ProjectGuid>
+    <ProjectGuid>{069452AB-7E65-42E3-9EC4-005EBDA54CED}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Helper</RootNamespace>
-    <AssemblyName>Helper</AssemblyName>
+    <RootNamespace>Univapps</RootNamespace>
+    <AssemblyName>Univapps</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -32,7 +32,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <GenerateLibraryLayout>false</GenerateLibraryLayout>
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
@@ -50,7 +49,47 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
   -->
+<Target Name="AfterBuild">
+
+    <!-- Working directories, local repository directory and nuget command line exe -->
+  <PropertyGroup>
+    <NugetOutputDir>$(SolutionDir)Nuget\$(ProjectName)\</NugetOutputDir>
+    <NugetOutputDirLibWinRT>$(NugetOutputDir)lib\portable-win81+wpa81\</NugetOutputDirLibWinRT>
+
+    <NugetRepositoryDir>D:\DevTools\NugetLocalRepo\</NugetRepositoryDir>
+    <NugetCommandLine>$(SolutionDir)Nuget\NuGet.exe</NugetCommandLine>
+  </PropertyGroup>
+
+  <!-- Input, output and .nupkg files-->
+  <ItemGroup>
+    <NugetPkgFileOutput Include="$(SolutionDir)Nuget\$(ProjectName)\*.nupkg" />
+
+    <NugetOutputFiles Include="$(NugetOutputDirLibWinRT)$(TargetFileName)" />
+    <NugetOutputFiles Include="$(NugetOutputDirLibWinRT)$(ProjectPriFileName)" />
+
+    <NugetInputFiles Include="$(TargetPath)" />
+    <NugetInputFiles Include="$(ProjectPriFullPath)" />
+  </ItemGroup>
+
+  <!-- Clean Output Nuget directory (clean .winmd and .pri files)-->
+  <Delete Files="@(NugetOutputFiles)" />
+
+  <!-- Copy the .winmd and .pri files to Output lib winrt -->
+  <Copy Condition="'$(Configuration)'=='Release'"
+        SourceFiles="@(NugetInputFiles)" ContinueOnError="true"
+        DestinationFolder="$(NugetOutputDirLibWinRT)" />
+
+  <!-- Launch nuget.exe pack -->
+  <Exec Condition="'$(Configuration)'=='Release'"
+        WorkingDirectory="$(NugetOutputDir)"
+        Command="%22$(NugetCommandLine)%22 pack $(ProjectName).nuspec" >
+  </Exec>
+
+  <!-- Copy the .nupkg to the local repository -->
+  <Copy Condition="'$(Configuration)'=='Release'"
+        SourceFiles="@(NugetPkgFileOutput)" ContinueOnError="true"
+        DestinationFiles="@(NugetPkgFileOutput->'$(NugetRepositoryDir)%(Filename)%(Extension)')" />
+
+  </Target>
 </Project>
