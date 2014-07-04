@@ -19,7 +19,6 @@ namespace Vapps
             //
             // Check for existing registrations of this background task.
             //
-            //
 
             foreach (var cur in BackgroundTaskRegistration.AllTasks)
             {
