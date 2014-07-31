@@ -10,16 +10,38 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{68EA9179
 		Nuget\Univapps\Univapps.nuspec = Nuget\Univapps\Univapps.nuspec
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phonvapps", "Phonvapps\Phonvapps.csproj", "{A7AD0E92-7D03-4134-B54B-EE2BD59B717C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{069452AB-7E65-42E3-9EC4-005EBDA54CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{069452AB-7E65-42E3-9EC4-005EBDA54CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{069452AB-7E65-42E3-9EC4-005EBDA54CED}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{069452AB-7E65-42E3-9EC4-005EBDA54CED}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{069452AB-7E65-42E3-9EC4-005EBDA54CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{069452AB-7E65-42E3-9EC4-005EBDA54CED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{069452AB-7E65-42E3-9EC4-005EBDA54CED}.Release|ARM.ActiveCfg = Release|Any CPU
+		{069452AB-7E65-42E3-9EC4-005EBDA54CED}.Release|x86.ActiveCfg = Release|Any CPU
+		{A7AD0E92-7D03-4134-B54B-EE2BD59B717C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7AD0E92-7D03-4134-B54B-EE2BD59B717C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7AD0E92-7D03-4134-B54B-EE2BD59B717C}.Debug|ARM.ActiveCfg = Debug|ARM
+		{A7AD0E92-7D03-4134-B54B-EE2BD59B717C}.Debug|ARM.Build.0 = Debug|ARM
+		{A7AD0E92-7D03-4134-B54B-EE2BD59B717C}.Debug|x86.ActiveCfg = Debug|x86
+		{A7AD0E92-7D03-4134-B54B-EE2BD59B717C}.Debug|x86.Build.0 = Debug|x86
+		{A7AD0E92-7D03-4134-B54B-EE2BD59B717C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7AD0E92-7D03-4134-B54B-EE2BD59B717C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7AD0E92-7D03-4134-B54B-EE2BD59B717C}.Release|ARM.ActiveCfg = Release|ARM
+		{A7AD0E92-7D03-4134-B54B-EE2BD59B717C}.Release|ARM.Build.0 = Release|ARM
+		{A7AD0E92-7D03-4134-B54B-EE2BD59B717C}.Release|x86.ActiveCfg = Release|x86
+		{A7AD0E92-7D03-4134-B54B-EE2BD59B717C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

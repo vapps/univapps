@@ -50,46 +50,30 @@
   <Target Name="BeforeBuild">
   </Target>
   -->
-<Target Name="AfterBuild">
-
+  <Target Name="AfterBuild">
     <!-- Working directories, local repository directory and nuget command line exe -->
-  <PropertyGroup>
-    <NugetOutputDir>$(SolutionDir)Nuget\$(ProjectName)\</NugetOutputDir>
-    <NugetOutputDirLibWinRT>$(NugetOutputDir)lib\portable-win81+wpa81\</NugetOutputDirLibWinRT>
-
-    <NugetRepositoryDir>D:\DevTools\NugetLocalRepo\</NugetRepositoryDir>
-    <NugetCommandLine>$(SolutionDir)Nuget\NuGet.exe</NugetCommandLine>
-  </PropertyGroup>
-
-  <!-- Input, output and .nupkg files-->
-  <ItemGroup>
-    <NugetPkgFileOutput Include="$(SolutionDir)Nuget\$(ProjectName)\*.nupkg" />
-
-    <NugetOutputFiles Include="$(NugetOutputDirLibWinRT)$(TargetFileName)" />
-    <NugetOutputFiles Include="$(NugetOutputDirLibWinRT)$(ProjectPriFileName)" />
-
-    <NugetInputFiles Include="$(TargetPath)" />
-    <NugetInputFiles Include="$(ProjectPriFullPath)" />
-  </ItemGroup>
-
-  <!-- Clean Output Nuget directory (clean .winmd and .pri files)-->
-  <Delete Files="@(NugetOutputFiles)" />
-
-  <!-- Copy the .winmd and .pri files to Output lib winrt -->
-  <Copy Condition="'$(Configuration)'=='Release'"
-        SourceFiles="@(NugetInputFiles)" ContinueOnError="true"
-        DestinationFolder="$(NugetOutputDirLibWinRT)" />
-
-  <!-- Launch nuget.exe pack -->
-  <Exec Condition="'$(Configuration)'=='Release'"
-        WorkingDirectory="$(NugetOutputDir)"
-        Command="%22$(NugetCommandLine)%22 pack $(ProjectName).nuspec" >
-  </Exec>
-
-  <!-- Copy the .nupkg to the local repository -->
-  <Copy Condition="'$(Configuration)'=='Release'"
-        SourceFiles="@(NugetPkgFileOutput)" ContinueOnError="true"
-        DestinationFiles="@(NugetPkgFileOutput->'$(NugetRepositoryDir)%(Filename)%(Extension)')" />
-
+    <PropertyGroup>
+      <NugetOutputDir>$(SolutionDir)Nuget\$(ProjectName)\</NugetOutputDir>
+      <NugetOutputDirLibWinRT>$(NugetOutputDir)lib\portable-win81+wpa81\</NugetOutputDirLibWinRT>
+      <NugetRepositoryDir>D:\DevTools\NugetLocalRepo\</NugetRepositoryDir>
+      <NugetCommandLine>$(SolutionDir)Nuget\NuGet.exe</NugetCommandLine>
+    </PropertyGroup>
+    <!-- Input, output and .nupkg files-->
+    <ItemGroup>
+      <NugetPkgFileOutput Include="$(SolutionDir)Nuget\$(ProjectName)\*.nupkg" />
+      <NugetOutputFiles Include="$(NugetOutputDirLibWinRT)$(TargetFileName)" />
+      <NugetOutputFiles Include="$(NugetOutputDirLibWinRT)$(ProjectPriFileName)" />
+      <NugetInputFiles Include="$(TargetPath)" />
+      <NugetInputFiles Include="$(ProjectPriFullPath)" />
+    </ItemGroup>
+    <!-- Clean Output Nuget directory (clean .winmd and .pri files)-->
+    <Delete Files="@(NugetOutputFiles)" />
+    <!-- Copy the .winmd and .pri files to Output lib winrt -->
+    <Copy Condition="'$(Configuration)'=='Release'" SourceFiles="@(NugetInputFiles)" ContinueOnError="true" DestinationFolder="$(NugetOutputDirLibWinRT)" />
+    <!-- Launch nuget.exe pack -->
+    <Exec Condition="'$(Configuration)'=='Release'" WorkingDirectory="$(NugetOutputDir)" Command="%22$(NugetCommandLine)%22 pack $(ProjectName).nuspec">
+    </Exec>
+    <!-- Copy the .nupkg to the local repository -->
+    <Copy Condition="'$(Configuration)'=='Release'" SourceFiles="@(NugetPkgFileOutput)" ContinueOnError="true" DestinationFiles="@(NugetPkgFileOutput->'$(NugetRepositoryDir)%(Filename)%(Extension)')" />
   </Target>
 </Project>
